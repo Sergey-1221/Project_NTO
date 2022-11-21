@@ -5,5 +5,5 @@ from phonenumber_field.modelfields import PhoneNumberField
 class Hotel(models.Model):
 	name = models.CharField(max_length=200)
 	#phone = models.CharField(max_length=100)
-	description = models.TextField(max_length=500)
-	phone = PhoneNumberField(null=False, blank=False, unique=True)
+	description = models.TextField(max_length=500, verbose_name='Описание отеля')
+	phone = PhoneNumberField(null=False, blank=False, unique=True, verbose_name='Контактный номер')
