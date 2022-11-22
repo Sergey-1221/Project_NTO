@@ -2,9 +2,17 @@ from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
+
+class Manager(models.Model):
+	name = models.CharField(max_length=100, verbose_name='Фамилия Имя Отчество')
+	phone = PhoneNumberField(null=True, blank=False, unique=True, verbose_name='Контактный номер')
+	email = models.EmailField(max_length = 254, null=True, blank=False, verbose_name='E-mail')
+	comment = models.TextField(max_length=500, null=True, blank=False, verbose_name='Комментарий')
+
 class Hotel(models.Model):
 	name = models.CharField(max_length=200)
 	#phone = models.CharField(max_length=100)
+	manager = models.ForeignKey(Manager, on_delete = models.CASCADE, verbose_name='ФИО управляющего')
 	description = models.TextField(max_length=500, verbose_name='Описание отеля')
 	phone = PhoneNumberField(null=False, blank=False, unique=True, verbose_name='Контактный номер')
 
@@ -33,11 +41,3 @@ class Hotel(models.Model):
 	# 	verbose_name = 'Отель'
 	# 	verbose_name_plural = 'Отель'
 	# 	ordering = ['name_hotel']
-
-class Company(models.Model):
-	name = models.CharField(max_length=30)
-
-class Product(models.Model):
-	company = models.ForeignKey(Company, on_delete = models.CASCADE)
-	name = models.CharField(max_length=30)
-	price = models.IntegerField()
