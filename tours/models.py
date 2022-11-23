@@ -53,12 +53,17 @@ class Tours(models.Model):
 		("1","С завтраком"), 
 		("2","3-х разовое")
 	]
-	hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, verbose_name='Отель')
+
+	hotel = models.ForeignKey(Hotel, on_delete = models.CASCADE, verbose_name='Отель')
+	date_of_stay = models.DateField(auto_now = False , auto_now_add = True, verbose_name='Дата заезда')
+	numbers_day = models.IntegerField(verbose_name='Количество дней')
 	food = models.CharField(max_length=200, verbose_name='Вид питания', choices=FOOD_TYPE)
-	#phone = PhoneNumberField(null=True, blank=False, unique=True, verbose_name='Контактный номер')
-	
-	
-	"""
-	def __str__(self):
-		return self.name
-	"""
+	price = models.IntegerField(verbose_name='Стоимость тура')
+	description = models.TextField(max_length=500, verbose_name='Описание тура')
+
+class Client(models.Model):
+	name = models.CharField(max_length=100, verbose_name='Фамилия Имя Отчество')
+	contact_person = models.ForeignKey(Manager, on_delete=models.CASCADE, verbose_name='Контактное лицо')
+	options = (('Физическое лицо','Физическое лицо'),
+	     ('Юридическое лицо', 'Юридическое лицо'))
+	option = models.CharField(max_length=100, verbose_name='Вид клиента', choices=options)
