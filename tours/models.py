@@ -5,8 +5,8 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 class Manager(models.Model):
 	class Meta:
-		verbose_name = "Управляющий"
-		verbose_name_plural = "Управляющие"
+		verbose_name = "Контактное лицо"
+		verbose_name_plural = "Контактные лица"
 
 	name = models.CharField(max_length=100, verbose_name='Фамилия Имя Отчество')
 	phone = PhoneNumberField(null=True, blank=False, unique=True, verbose_name='Контактный номер')
@@ -34,7 +34,6 @@ class Hotel(models.Model):
 	cities = tuple(cities)
 
 	name = models.CharField(max_length=200, verbose_name='Название отеля')
-	#phone = models.CharField(max_length=100)
 	manager = models.ForeignKey(Manager, on_delete=models.CASCADE, verbose_name='ФИО управляющего')
 	phone = PhoneNumberField(null=False, blank=False, unique=True, verbose_name='Контактный номер')
 	location = models.CharField(max_length=200, verbose_name='Местоположение', choices=cities)
@@ -55,15 +54,27 @@ class Tours(models.Model):
 	]
 
 	hotel = models.ForeignKey(Hotel, on_delete = models.CASCADE, verbose_name='Отель')
-	date_of_stay = models.DateField(auto_now = False , auto_now_add = True, verbose_name='Дата заезда')
+	date_of_stay = models.DateField(null=True, auto_now = False, auto_now_add = False, verbose_name='Дата заезда')
+	date_of_exit = models.DateField(null=True, auto_now=False, auto_now_add=False, verbose_name='Дата выезда')
 	numbers_day = models.IntegerField(verbose_name='Количество дней')
 	food = models.CharField(max_length=200, verbose_name='Вид питания', choices=FOOD_TYPE)
-	price = models.IntegerField(verbose_name='Стоимость тура')
+	price = models.FloatField(verbose_name='Стоимость тура')
 	description = models.TextField(max_length=500, verbose_name='Описание тура')
 
+	class Meta:
+		verbose_name = "Тур"
+		verbose_name_plural = "Туры"
+
+	def tr()
+
 class Client(models.Model):
-	name = models.CharField(max_length=100, verbose_name='Фамилия Имя Отчество')
+	name = models.CharField(max_length=100, verbose_name='Клиент')
 	contact_person = models.ForeignKey(Manager, on_delete=models.CASCADE, verbose_name='Контактное лицо')
 	options = (('Физическое лицо','Физическое лицо'),
 	     ('Юридическое лицо', 'Юридическое лицо'))
+	phone = PhoneNumberField(null=True, blank=False, unique=True, verbose_name='Контактный номер')
 	option = models.CharField(max_length=100, verbose_name='Вид клиента', choices=options)
+
+	class Meta:
+		verbose_name = "Клиент"
+		verbose_name_plural = "Клиенты"

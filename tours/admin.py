@@ -6,6 +6,7 @@ from .models import Hotel, Manager, Tours, Client
 
 admin.site.register(Tours) 
 admin.site.register(Client) 
+
 @admin.register(Hotel) 
 class HotelAdmin(admin.ModelAdmin):
     list_display = ("name", "manager", "phone", "location", "description")
