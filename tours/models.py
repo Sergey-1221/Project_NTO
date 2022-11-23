@@ -65,6 +65,13 @@ class Tours(models.Model):
 		verbose_name = "Тур"
 		verbose_name_plural = "Туры"
 
+	def Days_Nights(self):
+		days = self.date_of_exit - self.date_of_stay
+		nights = self.date_of_exit - self.date_of_stay
+		print(type(days))
+		return f"{days}\\{nights}"
+
+	Days_Nights.short_description = 'Дней \\ Ночей'
 
 class Client(models.Model):
 	name = models.CharField(max_length=100, verbose_name='Клиент')

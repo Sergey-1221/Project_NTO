@@ -4,8 +4,12 @@ from django.contrib import admin
 from .models import Hotel, Manager, Tours, Client
 
 
-admin.site.register(Tours) 
 admin.site.register(Client) 
+
+@admin.register(Tours)
+class ToursAdmin(admin.ModelAdmin):
+    list_display = ("hotel", "Days_Nights", "date_of_stay", "date_of_exit", "food", "price", "description")
+    fields = "hotel", ("date_of_stay", "date_of_exit"), "food", "price", "description"
 
 @admin.register(Hotel) 
 class HotelAdmin(admin.ModelAdmin):
