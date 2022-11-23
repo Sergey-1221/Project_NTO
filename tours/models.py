@@ -65,7 +65,6 @@ class Tours(models.Model):
 		verbose_name = "Тур"
 		verbose_name_plural = "Туры"
 
-	def tr()
 
 class Client(models.Model):
 	name = models.CharField(max_length=100, verbose_name='Клиент')
