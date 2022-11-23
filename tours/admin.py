@@ -4,7 +4,10 @@ from django.contrib import admin
 from .models import Hotel, Manager, Tours, Client
 
 
-admin.site.register(Client) 
+
+@admin.register(Client) 
+class ClientAdmin(admin.ModelAdmin):
+    list_display = ("name", "contact_person", "phone", "option")
 
 @admin.register(Tours)
 class ToursAdmin(admin.ModelAdmin):

@@ -72,14 +72,23 @@ class Tours(models.Model):
 
 	days_nights.short_description = 'Дней \\ Ночей'
 
+	def __str__(self):
+		return self.hotel
+
 class Client(models.Model):
 	name = models.CharField(max_length=100, verbose_name='Клиент')
 	contact_person = models.ForeignKey(Manager, on_delete=models.CASCADE, verbose_name='Контактное лицо')
 	options = (('Физическое лицо','Физическое лицо'),
 	     ('Юридическое лицо', 'Юридическое лицо'))
-	phone = PhoneNumberField(null=True, blank=False, unique=True, verbose_name='Контактный номер')
 	option = models.CharField(max_length=100, verbose_name='Вид клиента', choices=options)
+
+	def phone(self):
+		return self.contact_person.phone
+	phone.short_description = 'Телефон'
 
 	class Meta:
 		verbose_name = "Клиент"
 		verbose_name_plural = "Клиенты"
+
+	def __str__(self):
+		return self.name
