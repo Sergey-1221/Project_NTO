@@ -42,3 +42,23 @@ class Hotel(models.Model):
 
 	def __str__(self):
 		return self.name
+
+class Tours(models.Model):
+	class Meta:
+		verbose_name = "Тур"
+		verbose_name_plural = "Туры"
+
+	FOOD_TYPE = [
+		("0","Без питания"), 
+		("1","С завтраком"), 
+		("2","3-х разовое")
+	]
+	hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, verbose_name='Отель')
+	food = models.CharField(max_length=200, verbose_name='Вид питания', choices=FOOD_TYPE)
+	#phone = PhoneNumberField(null=True, blank=False, unique=True, verbose_name='Контактный номер')
+	
+	
+	"""
+	def __str__(self):
+		return self.name
+	"""
