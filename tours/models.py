@@ -54,11 +54,10 @@ class Tours(models.Model):
 	]
 
 	hotel = models.ForeignKey(Hotel, on_delete = models.CASCADE, verbose_name='Отель')
-	date_of_stay = models.DateField(null=True, auto_now = False, auto_now_add = False, verbose_name='Дата заезда')
-	date_of_exit = models.DateField(null=True, auto_now=False, auto_now_add=False, verbose_name='Дата выезда')
-	numbers_day = models.IntegerField(verbose_name='Количество дней')
+	date_of_stay = models.DateField(auto_now = False, auto_now_add = False, verbose_name='Дата заезда')
+	date_of_exit = models.DateField(auto_now=False, auto_now_add=False, verbose_name='Дата выезда')
 	food = models.CharField(max_length=200, verbose_name='Вид питания', choices=FOOD_TYPE)
-	price = models.FloatField(verbose_name='Стоимость тура')
+	price = models.FloatField(verbose_name='Стоимость тура (Руб)')
 	description = models.TextField(max_length=500, verbose_name='Описание тура')
 
 	class Meta:
@@ -73,7 +72,7 @@ class Tours(models.Model):
 	days_nights.short_description = 'Дней \\ Ночей'
 
 	def __str__(self):
-		return self.hotel
+		return self.description
 
 class Client(models.Model):
 	name = models.CharField(max_length=100, verbose_name='Клиент')
