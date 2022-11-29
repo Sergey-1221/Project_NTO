@@ -6,7 +6,7 @@ from .models import *
 
 @admin.register(Tour_order) 
 class Tour_orderAdmin(admin.ModelAdmin):
-    list_display = ("сlient", "payment")
+    list_display = ("сlient", "payment", "tour", "discount", "people", "total_price")
 
 @admin.register(Client) 
 class ClientAdmin(admin.ModelAdmin):

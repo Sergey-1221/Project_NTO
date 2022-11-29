@@ -103,3 +103,12 @@ class Tour_order(models.Model):
 		("Кредит","Кредит")
 	]
 	payment = models.CharField(max_length=100, verbose_name='Вид оплаты', choices=payment_type)
+	tour = models.ForeignKey(Tours, on_delete=models.CASCADE, verbose_name='Тур')
+	discount = models.FloatField(default=0, verbose_name='Скидка')
+	people = models.IntegerField(default=1, verbose_name='Количество человек')
+
+	def total_price(self):
+		return round((self.tour.price-self.discount)*self.people,2)
+
+	total_price.short_description = 'Стоимость'
+	
