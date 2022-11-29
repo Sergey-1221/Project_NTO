@@ -78,7 +78,7 @@ class Client(models.Model):
 	name = models.CharField(max_length=100, verbose_name='Клиент')
 	contact_person = models.ForeignKey(Manager, on_delete=models.CASCADE, verbose_name='Контактное лицо')
 	options = (('Физическое лицо','Физическое лицо'),
-	     ('Юридическое лицо', 'Юридическое лицо'))
+		('Юридическое лицо', 'Юридическое лицо'))
 	option = models.CharField(max_length=100, verbose_name='Вид клиента', choices=options)
 
 	def phone(self):
@@ -91,3 +91,15 @@ class Client(models.Model):
 
 	def __str__(self):
 		return self.name
+
+class Tour_order(models.Model):
+	class Meta:
+		verbose_name = "Заказ тура"
+		verbose_name_plural = "Заказ тура"
+
+	сlient = models.ForeignKey(Client, on_delete=models.CASCADE, verbose_name='Клиент')
+	payment_type = [
+		("Предоплата","Предоплата"),
+		("Кредит","Кредит")
+	]
+	payment = models.CharField(max_length=100, verbose_name='Вид оплаты', choices=payment_type)

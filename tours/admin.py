@@ -1,9 +1,12 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Hotel, Manager, Tours, Client
+from .models import *
 
 
+@admin.register(Tour_order) 
+class Tour_orderAdmin(admin.ModelAdmin):
+    list_display = ("сlient", "payment")
 
 @admin.register(Client) 
 class ClientAdmin(admin.ModelAdmin):
