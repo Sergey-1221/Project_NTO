@@ -2,11 +2,15 @@ from django.contrib import admin
 
 # Register your models here.
 from .models import *
+from jet.filters import RelatedFieldAjaxListFilter
 
 
 @admin.register(Tour_order) 
 class Tour_orderAdmin(admin.ModelAdmin):
-    list_display = ("сlient", "payment", "tour", "discount", "people", "total_price")
+    list_display = ("сlient", "payment", "tour", "price", "discount", "people", "total_price")
+    list_filter = (
+        ("сlient", RelatedFieldAjaxListFilter),
+    )
 
 @admin.register(Client) 
 class ClientAdmin(admin.ModelAdmin):

@@ -107,8 +107,20 @@ class Tour_order(models.Model):
 	discount = models.FloatField(default=0, verbose_name='Скидка')
 	people = models.IntegerField(default=1, verbose_name='Количество человек')
 
+	def price(self):
+		return round((self.tour.price-self.discount),2)
+
+	price.short_description = 'Цена (со скидкой)'
+
 	def total_price(self):
 		return round((self.tour.price-self.discount)*self.people,2)
 
 	total_price.short_description = 'Стоимость'
+
+	@staticmethod
+	def autocomplete_search_fields():
+		return 'сlient'
+
+	def __str__(self):
+		return f"{self.tour}"
 	
