@@ -16,10 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from tours.views import *
+
 urlpatterns = [
+    path('get_total_price/<id_people>', get_total_price),
     path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
     path('jet/', include('jet.urls', 'jet')),
     #path('admin/', admin.site.urls),
     path('', admin.site.urls),
+    
 
 ]
