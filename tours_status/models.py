@@ -1,5 +1,6 @@
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
+from django.utils.html import format_html
 
 from tours.models import Tour_order
 # Create your models here.
@@ -51,7 +52,12 @@ class Sale(models.Model):
 	people.short_description = 'Количество человек'
 
 	def status(self):
-		return self.tour_order.tour_order.status
+		if self.tour_order.tour_order.status == "Отменен":
+			return format_html('<span style="color: #FF0000;"> {} </span>', self.tour_order.tour_order.status)
+		elif self.tour_order.tour_order.status == "Действует":
+			return format_html('<span style="color: #FFAA00;"> {} </span>', self.tour_order.tour_order.status)
+		else:
+			return format_html('<span style="color: #01A214;"> {} </span>', self.tour_order.tour_order.status)
 	status.short_description = 'Cтатус'
 
 	def price(self):

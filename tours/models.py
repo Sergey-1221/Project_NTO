@@ -1,5 +1,6 @@
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
+from django.utils.html import format_html
 
 # Create your models here.
 
@@ -113,6 +114,16 @@ class Tour_order(models.Model):
 		("Завершен","Завершен"),
 	]
 	status = models.CharField(default="Действует",max_length=100, verbose_name='Cтатус', choices=status_type)
+
+	def colored_status(self):
+		if self.status == "Отменен":
+			return format_html('<span style="color: #FF0000;"> {} </span>', self.status)
+		elif self.status == "Действует":
+			return format_html('<span style="color: #FFAA00;"> {} </span>', self.status)
+		else:
+			return format_html('<span style="color: #01A214;"> {} </span>', self.status)
+
+	colored_status.short_description = 'Статус'
 
 	def total_price(self):
 		return round(self.price_tmp*self.people,2)

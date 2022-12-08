@@ -7,7 +7,7 @@ from jet.filters import RelatedFieldAjaxListFilter
 
 @admin.register(Tour_order) 
 class Tour_orderAdmin(admin.ModelAdmin):
-    list_display = ("сlient", "payment", "tour", "price_tmp","people", "total_price", "status")
+    list_display = ("сlient", "payment", "tour", "price_tmp","people", "total_price", "colored_status")
     list_filter = (
         ("сlient", RelatedFieldAjaxListFilter),
     )
