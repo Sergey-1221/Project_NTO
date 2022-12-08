@@ -8,4 +8,4 @@ class PaymentAdmin(admin.ModelAdmin):
 
 @admin.register(Sale)
 class SaleAdmin(admin.ModelAdmin):
-    list_display = ("tour_order", "booking", "сlient", "payment_type", "price_tmp", "people", "status", "price")
+    list_display = ("tour_order", "booking", "сlient", "payment_type", "price_tmp", "people", "price")

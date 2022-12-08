@@ -117,14 +117,19 @@ class Tour_order(models.Model):
 
 	def colored_status(self):
 		if self.status == "Отменен":
-			return format_html('<span style="color: #FF0000;"> {} </span>', self.status)
+			return format_html('<b style="color: #FF0000;"> {} </b>', self.status)
 		elif self.status == "Действует":
-			return format_html('<span style="color: #FFAA00;"> {} </span>', self.status)
+			return format_html('<b style="color: #FFAA00;"> {} </b>', self.status)
 		else:
-			return format_html('<span style="color: #01A214;"> {} </span>', self.status)
+			return format_html('<b style="color: #01A214;"> {} </b>', self.status)
 
 	colored_status.short_description = 'Статус'
 
+	"""
+	def edit_status_completed(self):
+		self.status = "Завершен"
+	"""
+	
 	def total_price(self):
 		return round(self.price_tmp*self.people,2)
 
@@ -135,5 +140,5 @@ class Tour_order(models.Model):
 		return 'сlient'
 
 	def __str__(self):
-		return f"{self.tour}"
+		return f"{self.tour} | {self.сlient.contact_person}"
 	

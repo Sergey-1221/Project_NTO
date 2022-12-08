@@ -17,7 +17,8 @@ class Payment(models.Model):
 	price.short_description = 'Стоимость'
 
 	def __str__(self):
-		return f"{self.tour_order} | {self.tour_order.сlient}"
+		return f"{self.tour_order}"
+
 
 	"""
 	def __str__(self):
@@ -51,19 +52,16 @@ class Sale(models.Model):
 		return self.tour_order.tour_order.people
 	people.short_description = 'Количество человек'
 
-	def status(self):
-		if self.tour_order.tour_order.status == "Отменен":
-			return format_html('<span style="color: #FF0000;"> {} </span>', self.tour_order.tour_order.status)
-		elif self.tour_order.tour_order.status == "Действует":
-			return format_html('<span style="color: #FFAA00;"> {} </span>', self.tour_order.tour_order.status)
-		else:
-			return format_html('<span style="color: #01A214;"> {} </span>', self.tour_order.tour_order.status)
-	status.short_description = 'Cтатус'
-
 	def price(self):
 		return self.tour_order.price()
 	price.short_description = 'Стоимость'
 
+
+	def save(self, *args, **kwargs):
+		tour = Tour_order.objects.get(id=self.tour_order.tour_order.id)
+		tour.status = "Завершен"
+		tour.save()
+		super(Sale, self).save(*args, **kwargs)
 
 	def __str__(self):
 		return f"{self.tour_order}"
