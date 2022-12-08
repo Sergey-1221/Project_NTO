@@ -11,7 +11,7 @@ class Tour_orderAdmin(admin.ModelAdmin):
     list_filter = (
         ("сlient", RelatedFieldAjaxListFilter),
     )
-    exclude = ['status']
+    #exclude = ['status']
 
 @admin.register(Client) 
 class ClientAdmin(admin.ModelAdmin):
