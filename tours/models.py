@@ -3,6 +3,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 
+
 class Manager(models.Model):
 	class Meta:
 		verbose_name = "Контактное лицо"
@@ -106,6 +107,12 @@ class Tour_order(models.Model):
 	tour = models.ForeignKey(Tours, on_delete=models.CASCADE, verbose_name='Тур')
 	price_tmp = models.FloatField(verbose_name='Цена')
 	people = models.IntegerField(default=1, verbose_name='Количество человек')
+	status_type = [
+		("Отменен","Отменен"),
+		("Действует","Действует"),
+		("Завершен","Завершен"),
+	]
+	status = models.CharField(default="Действует",max_length=100, verbose_name='Cтатус', choices=status_type)
 
 	def total_price(self):
 		return round(self.price_tmp*self.people,2)

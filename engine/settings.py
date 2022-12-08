@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tours.apps.ToursConfig',
+    'tours_status.apps.TourStatusConfig',
     'phonenumber_field',
     'jet.dashboard',
     'jet',
