@@ -4,8 +4,8 @@ from .models import *
 
 @admin.register(Payment)
 class PaymentAdmin(admin.ModelAdmin):
-    list_display = ("tour_order", "price")
+    list_display = ("date", "tour_order", "price")
 
 @admin.register(Sale)
 class SaleAdmin(admin.ModelAdmin):
-    list_display = ("tour_order", "booking", "сlient", "payment_type", "price_tmp", "people", "price")
+    list_display = ("date", "tour_order", "booking", "сlient", "payment_type", "price_tmp", "people", "price")

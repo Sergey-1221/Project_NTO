@@ -14,6 +14,7 @@ class Payment(models.Model):
 	def price(self):
 		return self.tour_order.total_price()
 
+	date = models.DateTimeField(auto_now=True, verbose_name='Дата')
 	price.short_description = 'Стоимость'
 
 	def __str__(self):
@@ -35,6 +36,8 @@ class Sale(models.Model):
 		("Нет","Нет")
 	]
 	booking = models.CharField(max_length=100, verbose_name='Бронь номеров', choices=booking_type)
+
+	date = models.DateTimeField(auto_now=True, verbose_name='Дата')
 
 	def сlient(self):
 		return self.tour_order.tour_order.сlient
