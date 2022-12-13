@@ -11,3 +11,4 @@ def get_total_price(request, id_people):
 	json_data = {"id": price}
 	json_data = json.dumps(json_data)
 	return HttpResponse(json_data, content_type="application/json")
+

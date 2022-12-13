@@ -2,7 +2,7 @@ from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from django.utils.html import format_html
 
-from tours.models import Tour_order
+from tours.models import Tour_order, Tours
 # Create your models here.
 
 class Payment(models.Model):
@@ -68,3 +68,25 @@ class Sale(models.Model):
 
 	def __str__(self):
 		return f"{self.tour_order}"
+
+class Stats(Tours):
+	class Meta:
+		proxy = True
+		verbose_name = "тура"
+		verbose_name_plural = "туров"
+
+	def name(self):
+		return self.description
+	name.short_description = "Тур"
+
+	def order(self):
+		tour = Tour_order.objects.filter(tour=self)
+		return sum(x.total_price() for x in tour)
+
+	def sales(self):
+		tour = Sale.objects.filter(tour_order__tour_order__tour__id=self.id)
+		#tour = Sale.objects.all()
+		#print(tour[1].tour_order.tour_order.tour.id)
+		return sum(x.price() for x in tour)
+
+	order.short_description = 'Заказано'

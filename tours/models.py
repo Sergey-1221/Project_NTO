@@ -62,10 +62,6 @@ class Tours(models.Model):
 	price = models.FloatField(verbose_name='Стоимость тура (Руб)')
 	description = models.TextField(max_length=500, verbose_name='Описание тура')
 
-	class Meta:
-		verbose_name = "Тур"
-		verbose_name_plural = "Туры"
-
 	def days_nights(self):
 		days = self.date_of_exit - self.date_of_stay
 		nights = self.date_of_exit - self.date_of_stay
@@ -75,6 +71,7 @@ class Tours(models.Model):
 
 	def __str__(self):
 		return self.description
+
 
 class Client(models.Model):
 	name = models.CharField(max_length=100, verbose_name='Клиент')
