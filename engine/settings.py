@@ -40,8 +40,10 @@ INSTALLED_APPS = [
     'tours.apps.ToursConfig',
     'tours_status.apps.TourStatusConfig',
     'phonenumber_field',
+    'django_filters',
     'jet.dashboard',
     'jet',
+
     'django.contrib.admin',
 ]
 
@@ -132,6 +134,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 #jet-Django
+import django
+from django.utils.encoding import force_str
+django.utils.encoding.force_text = force_str
+
+    
 import django
 from django.utils.encoding import smart_str
 django.utils.encoding.smart_text = smart_str

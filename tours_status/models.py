@@ -3,6 +3,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 from django.utils.html import format_html
 
 from tours.models import Tour_order, Tours
+
 # Create your models here.
 
 class Payment(models.Model):
@@ -38,6 +39,10 @@ class Sale(models.Model):
 	booking = models.CharField(max_length=100, verbose_name='Бронь номеров', choices=booking_type)
 
 	date = models.DateTimeField(auto_now=True, verbose_name='Дата')
+
+	@staticmethod
+	def autocomplete_search_fields():
+		return "date"
 
 	def сlient(self):
 		return self.tour_order.tour_order.сlient
@@ -88,5 +93,9 @@ class Stats(Tours):
 		#tour = Sale.objects.all()
 		#print(tour[1].tour_order.tour_order.tour.id)
 		return sum(x.price() for x in tour)
+
+	@staticmethod
+	def autocomplete_search_fields():
+		return "date"
 
 	order.short_description = 'Заказано'
