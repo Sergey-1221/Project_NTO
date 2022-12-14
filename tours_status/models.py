@@ -3,7 +3,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 from django.utils.html import format_html
 
 from tours.models import Tour_order, Tours
-from rangefilter.filter import DateRangeFilter as OriginalDateRangeFilter
+#from rangefilter.filter import DateRangeFilter as OriginalDateRangeFilter
 # Create your models here.
 
 class Payment(models.Model):
