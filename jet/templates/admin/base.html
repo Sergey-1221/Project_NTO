@@ -408,6 +408,22 @@
             document.getElementsByClassName('results')[0].insertAdjacentHTML("afterend","<div style='margin: 20px;font-weight: 600;font-size: 26px;'><div style='float:right;'>Итог: "+price+" Руб.</div></div>");
         }
     };
+    if(url.pathname == "/tours_status/stats/"){
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/get_profit/', false);
+        xhr.send();
+        if (xhr.status == 200) {
+            data = JSON.parse(xhr.responseText);
+            price = data.id;
+            date = data.date;
+            document.getElementsByClassName('results')[0].insertAdjacentHTML("afterend","<div style='margin: 20px;font-weight: 600;font-size: 26px;'><div style='float:right;'>Остаток на счете: "+price+" Руб.</div></div>");
+            document.getElementsByClassName('results')[0].insertAdjacentHTML("beforebegin","<div style='margin: 20px;font-weight: 600;font-size: 26px;'>"+date+"</div>");
+
+            document.querySelector(".object-tools").style.display = "none";
+            document.querySelector(".actions").style.display = "none";
+            document.querySelector(".actions").style.display = "none";
+        }
+    };
     
     
 </script>

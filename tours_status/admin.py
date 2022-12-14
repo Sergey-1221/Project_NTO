@@ -22,4 +22,4 @@ class SaleAdmin(admin.ModelAdmin):
 
 @admin.register(Stats)
 class StatisticsAdmin(admin.ModelAdmin):
-    list_display = ("name", "order", "sales")
+    list_display = ("name", "order_count", "order", "sales_count", "sales")

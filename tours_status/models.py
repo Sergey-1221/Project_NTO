@@ -3,7 +3,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 from django.utils.html import format_html
 
 from tours.models import Tour_order, Tours
-
+from rangefilter.filter import DateRangeFilter as OriginalDateRangeFilter
 # Create your models here.
 
 class Payment(models.Model):
@@ -77,16 +77,32 @@ class Sale(models.Model):
 class Stats(Tours):
 	class Meta:
 		proxy = True
-		verbose_name = "тура"
-		verbose_name_plural = "туров"
+		verbose_name = "Статистика"
+		verbose_name_plural = "Статистика"
 
 	def name(self):
 		return self.description
 	name.short_description = "Тур"
 
+	def order_count(self):
+		tour = Tour_order.objects.filter(tour=self)
+		return len(tour)
+
+	order_count.short_description = 'Заказано (Кол)'
+
 	def order(self):
 		tour = Tour_order.objects.filter(tour=self)
 		return sum(x.total_price() for x in tour)
+
+	order.short_description = 'Заказано (Руб)'
+
+	def sales_count(self):
+		tour = Sale.objects.filter(tour_order__tour_order__tour__id=self.id)
+		#tour = Sale.objects.all()
+		#print(tour[1].tour_order.tour_order.tour.id)
+		return len(tour)
+
+	sales_count.short_description = 'Продано (Кол)'
 
 	def sales(self):
 		tour = Sale.objects.filter(tour_order__tour_order__tour__id=self.id)
@@ -94,8 +110,8 @@ class Stats(Tours):
 		#print(tour[1].tour_order.tour_order.tour.id)
 		return sum(x.price() for x in tour)
 
+	sales.short_description = 'Продано (Руб)'
+
 	@staticmethod
 	def autocomplete_search_fields():
 		return "date"
-
-	order.short_description = 'Заказано'

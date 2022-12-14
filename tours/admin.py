@@ -3,7 +3,6 @@ from django.contrib import admin
 # Register your models here.
 from .models import *
 from jet.filters import RelatedFieldAjaxListFilter
-from jet.filters import DateRangeFilter
 
 
 @admin.register(Tour_order) 
