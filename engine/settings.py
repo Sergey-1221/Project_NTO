@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-hwpv7vm#m-zbz870o+t8%@%8she7=h&e1c539z4d3@^*^iyo8o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["109.71.14.18", "127.0.0.1"]
 
 
 # Application definition
@@ -40,8 +40,10 @@ INSTALLED_APPS = [
     'tours.apps.ToursConfig',
     'tours_status.apps.TourStatusConfig',
     'phonenumber_field',
+    'django_filters',
     'jet.dashboard',
     'jet',
+
     'django.contrib.admin',
 ]
 
@@ -132,6 +134,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 #jet-Django
+import django
+from django.utils.encoding import force_str
+django.utils.encoding.force_text = force_str
+
+    
 import django
 from django.utils.encoding import smart_str
 django.utils.encoding.smart_text = smart_str

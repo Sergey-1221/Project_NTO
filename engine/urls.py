@@ -20,7 +20,8 @@ from tours.views import *
 
 urlpatterns = [
     path('get_total_price/<id_people>', get_total_price),
-    #path('', get_profit),
+    path('get_profit/', get_profit),
+    
     path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
     path('jet/', include('jet.urls', 'jet')),
     #path('admin/', admin.site.urls),
